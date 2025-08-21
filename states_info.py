@@ -30,9 +30,14 @@ class StatesInfo(Turtle):
     def missing_states_name(self, answered_states):
         """Return .csv file of not answered states names.
         Take input as answered states(list)"""
-        for state in self.data.state:
-            if state not in answered_states:
-                self.missing_states_list.append(state)
+
+        # ---Using List Comprehension---#
+        self.missing_states_list = [state for state in self.data.state if state not in answered_states]
+
+        #---Using normal for loop & if statement---#
+        # for state in self.data.state:
+        #     if state not in answered_states:
+        #         self.missing_states_list.append(state)
 
         missing_states_data = pandas.DataFrame(self.missing_states_list)
         missing_states_data.to_csv("States_to_learn.csv")
